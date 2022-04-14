@@ -3,7 +3,7 @@ import re
 from pymongo import MongoClient
 import datetime,json
 from db import insertNewRecord
-
+msValue = -1
 
 app = Flask(__name__)
 import bcrypt
@@ -146,36 +146,32 @@ def profile():
 
 
 ##API 
-@app.route("/user",methods = ['GET'])
-def user_get():
-    return ("http://127.0.0.1:2000/user")
+# @app.route("/user",methods = ['GET'])
+# def user_get():
+#     return ("http://127.0.0.1:2000/user")
 
-@app.route("/setMoisture",methods = ['GET'])
+@app.route("/moisturevalue",methods = ['POST'])
 def setmoisture_get():
-    return ("http://127.0.0.1:2000/setMoisture")
+    if msValue > 1 :
+        return msValue
+    return -1
+    
 
 
 
 @app.route("/setMoisture",methods = ['POST'])
 def setMoisture():
-    select = request.form.get('comp_select')
-    print(select,type(select))
-    try:
-        moistureLevel = select
-                     
-        # obj1 = {
-        #     'moistureLevel':moistureLevel
-        # }
-        # #post = open(f'./data/bhavesh.json','w')
-        # print(obj1)
-        # #post.write(json.dumps(obj))
-        # #post.close()
-        # k = insertNewRecord(obj1)
-        return {'status_code':200,'message':'Post created successful'}
-        
-    except Exception as e:
-        # return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
-        return -1
+    msValue = request.form['moisturealue']  
+    print(msValue,type(msValue))
+    if msValue > 1:
+        return msValue
+    return -1
+        # try:
+        #     # moistureLevel = msValue
+        #     return msValue    
+        # except Exception as e:
+        #     # return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
+        #     return -1
     
     
     # return ("http://127.0.0.1:2000/setsoilMoisture")
