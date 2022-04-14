@@ -3,6 +3,8 @@ import re
 from pymongo import MongoClient
 import datetime,json
 from db import insertNewRecord
+
+
 app = Flask(__name__)
 import bcrypt
 
@@ -14,13 +16,21 @@ mongo = MongoClient(app.config.get('MONGO_URI'))
 db =  mongo['test'] 
 collName = db['users']
 
+
+
 @app.route('/login/dashboard/')
 def dashboard():
     return render_template('overview.html')
 
-@app.route('/login/dashboard/moisturelevel/')
-def moisturelevel():
-    return render_template('overview.html')
+# @app.route('/login/dashboard/moisturelevelupdate/')
+# def moisturelevelupdate():
+#     # sms = ''
+#     # if request.method == 'POST' and not 'comp_select' in request.form:
+#     #     comp_select = request.form['comp_select']
+#     #     if not comp_select :
+#     #         sms = 'Please select range of moisture level!'
+#     return render_template('overview.html')
+    
 
 @app.route('/')
 def welcome():
@@ -30,14 +40,6 @@ def welcome():
 def login_home():
     return render_template('info.html')
 
-
-
-@app.route('/data')
-def data():
-    id = request.args.get('id')
-    charts = db['users']
-    result = charts.find_one({'name':id})
-    return jsonify({'results' : result['values']})
 
 # http://localhost:5000/login/ - the following will be our login page, which will use both GET and POST requests
 @app.route('/login/', methods=['GET', 'POST'])
@@ -144,26 +146,63 @@ def profile():
 
 
 ##API 
-# @app.route("/user" ,methods = ['GET'])
-# def user_get():
-#     return ("http://127.0.0.1:2000/user")
+@app.route("/user",methods = ['GET'])
+def user_get():
+    return ("http://127.0.0.1:2000/user")
 
-@app.route("/user" ,methods = ['POST'])
+@app.route("/setMoisture",methods = ['GET'])
+def setmoisture_get():
+    return ("http://127.0.0.1:2000/setMoisture")
+
+
+
+@app.route("/setMoisture",methods = ['POST'])
+def setMoisture():
+    select = request.form.get('comp_select')
+    print(select,type(select))
+    try:
+        moistureLevel = select
+                     
+        # obj1 = {
+        #     'moistureLevel':moistureLevel
+        # }
+        # #post = open(f'./data/bhavesh.json','w')
+        # print(obj1)
+        # #post.write(json.dumps(obj))
+        # #post.close()
+        # k = insertNewRecord(obj1)
+        return {'status_code':200,'message':'Post created successful'}
+        
+    except Exception as e:
+        # return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
+        return -1
+    
+    
+    # return ("http://127.0.0.1:2000/setsoilMoisture")
+
+# @app.route("/test" , methods=['GET', 'POST'])
+# def test():
+#     select = request.form.get('comp_select')
+#     print(str(select))
+#     return(str(select)) # just to see what select is
+
+
+@app.route("/user" , methods = ['POST'])
 def user_post():
     data = request.json
     try:
         temperature = data['temperature']
         humidity = data['humidity']
         light = data['light']
-        moistureLevel = data["moistureLevel"]
-        #post = open(f'./data/bhavesh.json','w')
-        
+        moistureLevel = data['moistureLevel']
+                     
         obj = {
             'temperature': temperature,
             'humidity':humidity,
             'light':light,
-            'moistureLevel':moistureLevel  
+            'moistureLevel':moistureLevel
         }
+        #post = open(f'./data/bhavesh.json','w')
         print(obj)
         #post.write(json.dumps(obj))
         #post.close()
@@ -174,5 +213,5 @@ def user_post():
         return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
     
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(debug = True,port=2000)
 

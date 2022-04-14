@@ -12,7 +12,7 @@ def insertNewRecord(data):
     humidity=data['humidity']
     moistureLevel=data['moistureLevel']
     timeStamp = dt.now()
-    k= collName.insert_one({"temperature":temperature,
+    k = collName.insert_one({"temperature":temperature,
                             "humidity":humidity,"light":light,
                             "moistureLevel":moistureLevel,"timeStamp":timeStamp})
     return k
