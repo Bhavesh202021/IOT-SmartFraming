@@ -190,7 +190,7 @@ def test():
 #     print(msValue,type(msValue))
 #     if msValue > 1:
 #         return msValue
-    return -1
+    #return -1
         # try:
         #     # moistureLevel = msValue
         #     return msValue    
