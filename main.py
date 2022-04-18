@@ -152,9 +152,8 @@ def user_get():
 
 @app.route("/setSoilmoisture" , methods=['GET', 'POST'])
 def test():
-    select1 = request.form.get('choose-soil-multiple')
-    print(str(select1))  
-    soilmoisture = select1
+    moistvalue = int(request.form.get('choose-soil-multiple'))
+    print(moistvalue)
     try:
         # obj = {
         #     'moistureLevel': soilmoisture
@@ -166,9 +165,10 @@ def test():
         # print(obj)
             #post.write(json.dumps(obj))
             #post.close()
-        r = insertsoilRecord(soilmoisture)
+        r = insertsoilRecord(moistvalue)
         
-        return {'status_code':200,'message':'Post created successful'}
+        # return {'status_code':200,'message':'Post created successful'}
+        return moistvalue
             
     except Exception as e:
         return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
