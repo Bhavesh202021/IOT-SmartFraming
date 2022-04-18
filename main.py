@@ -152,7 +152,7 @@ def user_get():
 
 @app.route("/setSoilmoisture" , methods=['GET', 'POST'])
 def test():
-    moistvalue = int(request.form.get('choose-soil-multiple'))
+    moistvalue = int(request.form['soilValue'])
     print(moistvalue)
     try:
         # obj = {
