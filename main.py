@@ -140,9 +140,9 @@ def profile():
 
 
 ##API 
-@app.route("/user",methods = ['GET'])
+@app.route("/getMoisturevalue",methods = ['GET'])
 def user_get():
-    return ("http://127.0.0.1:2000/user")
+    return str(moistvalue)
 
 
 # @app.route('/setSoilmoisture', methods=['GET', 'POST'])
@@ -152,6 +152,7 @@ def user_get():
 
 @app.route("/setSoilmoisture" , methods=['GET', 'POST'])
 def test():
+    global moistvalue
     moistvalue = int(request.form['soilValue'])
     print(moistvalue)
     try:
@@ -168,7 +169,7 @@ def test():
         r = insertsoilRecord(moistvalue)
         
         # return {'status_code':200,'message':'Post created successful'}
-        return moistvalue
+        return redirect(url_for('dashboard'))
             
     except Exception as e:
         return {'status_code':300 , 'message':f'Generic error:{str(e)}'}
@@ -216,8 +217,6 @@ def user_post():
         light = data['light']
         moistureLevel = data['moistureLevel']
         
-            
-            
                         
         obj = {
             'temperature': temperature,
