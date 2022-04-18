@@ -128,25 +128,10 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
       <form class="form-inline" method="POST" action="{{ url_for('test') }}"> 
         <div class="form-group">
           <div class="input-group">
-            <div style = "width:120px">
-
-              <select id="choose-soil-multiple" name = "soilValue" required> 
-                <option id="moisture_value"  selected>Select level...</option>
-                <option id="moisture_value" value="20">20%</option>
-                <option id="moisture_value" value="40">40%</option>
-                <option id="moisture_value"  value="60">60%</option>
-                <option id="moisture_value"  value="80">80%</option>
-            </select>
-              <!--
-                  <select name="moisturealue" class="selectpicker form-control"aria-label="Example select with button addon">
-                    <option id="moisture_value" selected>Select level...</option>
-                    <option id="moisture_value" value="20"> 20%</option>
-                    <option id="moisture_value" value="40"> 40%</option>
-                    <option id="moisture_value" value="60"> 60%</option>
-                    <option id="moisture_value" value="80"> 80%</option>
-                  </select> -->
+            <div>
+              <input type="number" id="fname" class="field" name="soilValue" min="1" max="100"  required placeholder="Enter Value" ><br><br>
               </div>
-            <div style = " background-color:#24ad4a; border: none; padding: 1px 1px; margin-left:15px;text-align: center; text-decoration: none; display: inline-block;font-size: 10px;">
+            <div style = " background-color:#24ad4a; border: none; padding: 1px 1px; margin-left:10px;text-align: center; text-decoration: none; display: inline-block;font-size: 10px; height:31px;">
             <button type="submit" id="btn1" value="Submit" class="btn btn-default"  disable>Go</button>
           </div> 
         </div>
