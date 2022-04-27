@@ -217,6 +217,8 @@ def user_post():
             }
             #post = open(f'./data/bhavesh.json','w')
         print(obj)
+        print("*****************")
+        
             #post.write(json.dumps(obj))
             #post.close()
         l = insertNewRecord(obj)
