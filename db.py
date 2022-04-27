@@ -5,7 +5,7 @@ conn = MongoClient('mongodb+srv://bhavesh:bhau2021@cluster0.1mj5o.mongodb.net/te
 db = conn['test']
 
 collName = db['realtimedata']
-collName1 = db['charts']
+collName = db['charts']
 
 def insertNewRecord(data):
     temperature= data['temperature']
@@ -22,7 +22,7 @@ def insertNewRecord(data):
 def insertsoilRecord(select):
     soilmoisture = select
     timeStamp = dt.now()
-    s = collName1.insert_one({'moistureLevel':soilmoisture,"timeStamp":timeStamp})
+    s = collName.insert_one({'moistureLevel':soilmoisture,"timeStamp":timeStamp})
     
     return s
     
