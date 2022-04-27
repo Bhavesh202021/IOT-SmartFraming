@@ -156,16 +156,7 @@ def test():
     moistvalue = int(request.form['soilValue'])
     print(moistvalue)
     try:
-        # obj = {
-        #     'moistureLevel': soilmoisture
-        # }         
-        # # obj = {
-        # #     'moistureLevel': moistureLevel
-        # #     }
-        #     #post = open(f'./data/bhavesh.json','w')
-        # print(obj)
-            #post.write(json.dumps(obj))
-            #post.close()
+        
         r = insertsoilRecord(moistvalue)
         
         # return {'status_code':200,'message':'Post created successful'}
