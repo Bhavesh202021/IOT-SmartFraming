@@ -17,12 +17,13 @@ mongo = MongoClient(app.config.get('MONGO_URI'))
 db =  mongo['test'] 
 collName = db['users']
 
-
+collName1 = db['charts']
 
 
 @app.route('/login/dashboard/',methods=['GET', 'POST'])
 def dashboard():
     print("-----------------")
+    # my_data = collName1.find_one().sort({_id:-1}).limit(1)
     return render_template('overview.html')
 
     
